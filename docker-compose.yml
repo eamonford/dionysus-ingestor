@@ -1,0 +1,8 @@
+version: '2'
+services:
+    ingestor:
+        image: eamonford/ingestor
+    mosquitto:
+        image: eamonford/mosquitto
+        ports:
+            - "1883:1883"
