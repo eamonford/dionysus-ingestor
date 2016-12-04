@@ -20,7 +20,7 @@ class Configuration(Borg):
 
 	def getDatabaseConnection(self):
 		try:
-			return sqlite3.connect('/ingestor/sensors.db')
+			return sqlite3.connect('/var/lib/dionysus/sensors.db')
 		except:
-			logging.error("Unable to connect to Postgres. Connection string was: " + connectionString)
+			logging.error("Unable to connecto to sqlite.")
 			raise

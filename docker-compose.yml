@@ -2,7 +2,13 @@ version: '2'
 services:
     ingestor:
         image: eamonford/ingestor
+        volumes_from:
+            - db
     mosquitto:
         image: eamonford/mosquitto
         ports:
             - "1883:1883"
+    db:
+        image: eamonford/persistence
+        volumes:
+            - /var/lib/dionysus
