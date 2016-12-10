@@ -1,14 +1,26 @@
 version: '2'
 services:
-    ingestor:
-        image: eamonford/ingestor
-        volumes_from:
-            - db
     mosquitto:
         image: eamonford/mosquitto
         ports:
             - "1883:1883"
     db:
         image: eamonford/persistence
+        ports:
+            - "8083:8083"
+            - "8086:8086"
         volumes:
             - /var/lib/dionysus
+            - /var/lib/influxdb
+    ingestor:
+        image: eamonford/ingestor
+        volumes_from:
+            - db
+        depends_on:
+            - db
+            - mosquitto
+    persistor:
+        image: eamonford/persistor
+        depends_on:
+            - db
+            - mosquitto
