@@ -24,3 +24,5 @@ services:
         depends_on:
             - db
             - mosquitto
+        environment:
+            - INFLUXDB_HOST=db
