@@ -13,10 +13,7 @@ class Borg:
 class Configuration(Borg):
 	def __init__(self):
 		Borg.__init__(self)
-		self.dbUsername = os.getenv('DB_USERNAME', "postgres")
-		self.dbPassword = os.getenv('DB_PASSWORD', "dionysus")
-		self.dbName = os.getenv('DB_NAME', "uranusdb")
-		self.dbHost = os.getenv('DB_HOST', 'localhost')
+		self.mqttHost = os.getenv('MQTT_HOST', 'localhost')
 
 	def getDatabaseConnection(self):
 		try:

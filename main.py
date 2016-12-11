@@ -4,6 +4,7 @@ from spyrk import SparkCloud
 import OperationsScheduler
 from dao.SensorDataAccessor import SensorDataAccessor
 import sqlite3
+import Config
 
 ACCESS_TOKEN = 'a520cd5bd34112b273fda91b1164f011b81fd2de'
 
@@ -28,7 +29,7 @@ def main():
     sparkClient = SparkCloud(ACCESS_TOKEN)
     mqttClient = mqtt.Client()
     mqttClient.on_connect = on_connect
-    mqttClient.connect("eamonford.hopto.org", 1883, 60)
+    mqttClient.connect(Config.Configuration().mqttHost, 1883, 60)
 
     OperationsScheduler.asyncRunAtInterval(getReadingsAndPublish, 1, (mqttClient, sparkClient), repeat=True)
     mqttClient.loop_forever()

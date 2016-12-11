@@ -19,6 +19,8 @@ services:
         depends_on:
             - db
             - mosquitto
+        environment:
+            - MQTT_HOST=mosquitto
     persistor:
         image: eamonford/persistor
         depends_on:
@@ -26,3 +28,4 @@ services:
             - mosquitto
         environment:
             - INFLUXDB_HOST=db
+            - MQTT_HOST=mosquitto
