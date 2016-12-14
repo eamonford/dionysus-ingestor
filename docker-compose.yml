@@ -29,3 +29,11 @@ services:
         environment:
             - INFLUXDB_HOST=db
             - MQTT_HOST=mosquitto
+    dashboard:
+        image: grafana/grafana
+        depends_on:
+            - db
+        volumes_from:
+            - db
+        ports:
+            - "3000:3000"

@@ -23,7 +23,7 @@ def getReadingsAndPublish(args):
             print("logging to dionysus/moisture: " + jsonString)
             client.publish("dionysus/moisture", jsonString)
         except:
-            logging.error("Error: unable to get/publish reading from sensor" + sensor["name"] + ". Sensor may be offline.")
+            logging.error("Error: unable to get/publish reading from sensor " + sensor["name"] + ". Sensor may be offline.")
 
 def main():
     sparkClient = SparkCloud(ACCESS_TOKEN)
