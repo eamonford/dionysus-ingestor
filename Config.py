@@ -1,4 +1,4 @@
-# import psycopg2
+import psycopg2
 import sqlite3
 import os
 import time
@@ -14,10 +14,18 @@ class Configuration(Borg):
 	def __init__(self):
 		Borg.__init__(self)
 		self.mqttHost = os.getenv('MQTT_HOST', 'localhost')
+		self.pgHost = os.getenv('PG_HOST', 'localhost')
+		self.pgUser = os.getenv('PG_USER', 'admin')
+		self.pgPass = os.getenv('PG_PASS', 'password')
+		self.pgDatabase = os.getenv('PG_DATABASE', 'database')
 
 	def getDatabaseConnection(self):
 		try:
-			return sqlite3.connect('/var/lib/dionysus/sensors.db')
+			return psycopg2.connect(
+			host=self.pgHost,
+			database=self.pgDatabase,
+			user=self.pgUser,
+			password=self.pgPass)
 		except:
-			logging.error("Unable to connecto to sqlite.")
+			logging.error("Unable to connecto to Postgres.")
 			raise
