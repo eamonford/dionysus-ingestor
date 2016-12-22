@@ -27,5 +27,5 @@ class Configuration(Borg):
 			user=self.pgUser,
 			password=self.pgPass)
 		except:
-			logging.error("Unable to connecto to Postgres.")
+			logging.error("Unable to connect to Postgres.")
 			raise
