@@ -3,6 +3,8 @@ import thread
 import logging
 from datetime import datetime as dt
 
+logging.basicConfig()
+Logger = logging.getLogger(__name__)
 
 def __runAtInterval(function, period, args, repeat=False):
     while True:
@@ -10,7 +12,7 @@ def __runAtInterval(function, period, args, repeat=False):
         try:
             function(args)
         except:
-            logging.exception("Failed to execute interval-scheduled "
+            Logger.exception("Failed to execute interval-scheduled "
                               "operation. It will be reattempted at the " +
                               "next scheduled time.")
         if not repeat:
@@ -24,7 +26,7 @@ def __runAtTime(function, hour, minute, args, repeat=False):
             try:
                 function(args)
             except:
-                logging.exception("Failed to execute time-scheduled "
+                Logger.exception("Failed to execute time-scheduled "
                                   "operation. It will be reattempted at the " +
                                   "next scheduled time.")
             if not repeat:

@@ -1,13 +1,12 @@
-import Config
 import logging
 
 
 class DataAccessor(object):
     """Access plant records in the database."""
 
-    def __init__(self, table):
+    def __init__(self, table, connection):
         """Initialize a database connection and use the specified table for all queries."""
-        self.connection = Config.Configuration().getDatabaseConnection()
+        self.connection = connection
         self.table = table
 
     def create(self, **kwargs):
@@ -32,6 +31,21 @@ class DataAccessor(object):
             raise
         finally:
             cursor.close()
+
+
+
+    def getById(self, id):
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("SELECT * FROM " + self.table + " WHERE id = '" + id + "'")
+        except:
+            raise
+        else:
+            return self.__makeDictOfResponse(cursor.description,
+                                             cursor.fetchall())
+        finally:
+            cursor.close()
+
 
     def __makeDictOfResponse(self, description, records):
         return [{columnName: record[columnIndex]
