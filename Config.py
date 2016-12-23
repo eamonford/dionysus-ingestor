@@ -30,7 +30,7 @@ class Configuration(Borg):
 			database=self.pgDatabase,
 			user=self.pgUser,
 			password=self.pgPass)
-			Logger.log(20, "Connected to Postgres host " + self.pgHost)
+			Logger.info("Connected to Postgres host " + self.pgHost)
 			return connection
 		except:
 			Logger.error("Unable to connect to Postgres.")
