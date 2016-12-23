@@ -25,12 +25,11 @@ def getReadingsAndPublish(args):
     for sensor in sensors:
         try:
             value = spark.devices[sensor["name"]].read()
-            jsonString = "{\"id\": \"" + sensor["id"] + "\",\"device_id\": \"" + sensor["device_id"] + "\",\"value\": " + str(value) + "}"
-            print("logging to dionysus/moisture: " + jsonString)
+            jsonString = "{\"id\": " + str(sensor["id"]) + ",\"device_id\": \"" + sensor["device_id"] + "\",\"value\": " + str(value) + "}"
+            Logger.info("Publishing to dionysus/moisture: " + jsonString)
             client.publish("dionysus/moisture", jsonString)
         except:
             Logger.error("Error: unable to get/publish reading from sensor " + sensor["name"] + ". Sensor may be offline.")
-            raise
 
 def main():
 
