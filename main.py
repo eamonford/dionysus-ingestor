@@ -38,7 +38,7 @@ def main():
     mqttClient.on_connect = on_connect
     mqttClient.connect(Config.Configuration().mqttHost, 1883, 60)
 
-    OperationsScheduler.asyncRunAtInterval(getReadingsAndPublish, 1, (mqttClient, sparkClient), repeat=True)
+    OperationsScheduler.asyncRunAtInterval(getReadingsAndPublish, 600, (mqttClient, sparkClient), repeat=True)
     mqttClient.loop_forever()
 
 main()
