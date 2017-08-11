@@ -47,7 +47,7 @@ class DataAccessor(object):
             cursor.close()
 
 
-    def __makeDictOfResponse(self, description, records):
+    def _makeDictOfResponse(self, description, records):
         return [{columnName: record[columnIndex]
                 for columnName, columnIndex
                 in zip([column[0] for column in description],
